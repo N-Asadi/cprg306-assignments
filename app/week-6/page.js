@@ -1,11 +1,12 @@
+import ItemList from "./item-list";
+
 export default function Page() {
   return (
-    <main className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <div className="center-content h-screen flex items-center justify-center">
-        <h1 className="text-2xl font-bold text-center mb-4">
-          Week 6 Assignment is not available yet. Please check back again soon.
-        </h1>
-      </div>
+    <main className="max-w-4xl mx-auto p-8 bg-gray-50 shadow-xl rounded-lg mt-10">
+      <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">
+        Shopping List
+      </h1>
+      <ItemList />
     </main>
   );
 }
