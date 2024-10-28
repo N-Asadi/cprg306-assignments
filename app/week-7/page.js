@@ -1,24 +1,33 @@
-// "use client";
+"use client";
 
-// import DogList from "./dog-list";
-
-// export default function Page() {
-//   return (
-//     <div>
-//       <h1>Week 7</h1>
-//       <DogList />
-//     </div>
-//   );
-// }
+import ItemList from "./item-list";
+import ItemForm from "./new-item";
+import itemsData from "./item.json";
+import { useState } from "react";
 
 export default function Page() {
+  const [items, setItems] = useState(itemsData);
+
+  const handleAddItem = (newItem) => {
+    setItems([...items, newItem]);
+  };
+
   return (
-    <main className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      <div className="center-content h-screen flex items-center justify-center">
-        <h1 className="text-2xl font-bold text-center mb-4">
-          Week 7 Assignment is not available yet. Please check back again soon.
-        </h1>
-      </div>
-    </main>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <header className="bg-blue-600 text-white py-4 text-center">
+        <h1 className="text-3xl font-bold">Grocery List Manager</h1>
+      </header>
+
+      <main className="flex-grow p-4">
+        <ItemForm onAddItem={handleAddItem} />
+        <ItemList items={items} />
+      </main>
+
+      <footer className="bg-blue-600 text-white py-2 text-center">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} Grocery List App
+        </p>
+      </footer>
+    </div>
   );
 }

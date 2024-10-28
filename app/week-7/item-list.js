@@ -1,14 +1,13 @@
 "use client";
 
 import Item from "./item";
-import itemJson from "./item.json";
 import { useState } from "react";
 
-export default function ItemList() {
+export default function ItemList({ items }) {
   const [sortBy, setSortBy] = useState("name");
   const [groupByCategory, setGroupByCategory] = useState(false);
 
-  const groupedItems = itemJson.reduce((acc, item) => {
+  const groupedItems = items.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
     }
@@ -30,9 +29,14 @@ export default function ItemList() {
     a.localeCompare(b)
   );
 
-  const sortedItems = [...itemJson].sort((a, b) =>
-    a[sortBy].localeCompare(b[sortBy])
-  );
+  const sortedItems = [...items].sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    } else if (sortBy === "category") {
+      return a.category.localeCompare(b.category);
+    }
+    return 0;
+  });
 
   return (
     <div className="p-4">
@@ -72,7 +76,7 @@ export default function ItemList() {
       {groupByCategory ? (
         sortedCategories.map((category) => (
           <div key={category} className="mb-7 capitalize">
-            <h2 className="text-xl font-bold mb-1 text-blue-700 m">
+            <h2 className="text-2xl font-bold mb-2 text-blue-800">
               {category}
             </h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -83,7 +87,7 @@ export default function ItemList() {
           </div>
         ))
       ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 capitalize">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedItems.map((item) => (
             <Item key={item.id} {...item} />
           ))}
