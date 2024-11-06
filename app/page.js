@@ -112,7 +112,7 @@ export default function Page() {
 
                     <div className="mt-4 flex items-center text-primary">
                       <span className="text-sm font-medium">
-                        Start Assignment
+                        Open Assignment
                       </span>
                       <svg
                         className="w-5 h-5 ml-2 transition-transform duration-300 ease-in-out group-hover:translate-x-1"
